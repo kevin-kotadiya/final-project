@@ -1,0 +1,105 @@
+{% include 'hf/links.html' %}
+
+<body class="sectionbody">
+
+  <!-- ======= Header ======= -->
+  {% include "hf/header.html" %}
+  <!-- End Header -->
+  <main id="main">
+
+    <section class="inner-page">
+      <div class="container">
+        <p>
+            <section class="vh-100">
+                <div class="container py-5 h-100">
+                  <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-3 col-lg-6 col-xl-12">
+                      <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+
+                          <!-- {% if messages %}
+                          <ul class="messages">
+                            {% for message in messages %}
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                              <strong>{{message}}</strong>
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            {% endfor %}
+                          </ul>
+                          {% endif %} -->
+                          
+                          <h3 class="">Notes</h3>
+                            <hr>
+                            <!-- <input type="hidden" id="cstok" value='{% csrf_token %}'> -->
+                            <form id="query_form" enctype="multipart/form-data">
+                              {% csrf_token %}
+                                <div class="col-md-12">
+                                  <label for="validationDefault01" class="form-label">Query</label>
+                                  <input type="text" name="query" placeholder="Query" class="form-control" id="query" required>
+                                </div>
+                                <div class="col-md-12">
+                                  <label for="validationDefault04" class="form-label">Option</label>
+                                  <select class="form-select" name="option" id="option" required>
+                                    <option selected disabled value="">Choose...</option>
+                                    <option>Python</option>
+                                    <option>Android</option>
+                                    <option>iOs</option>
+                                  </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="validationDefault05" class="form-label">File</label>
+                                    <input type="file" name="file" class="form-control" id="file" required>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="validationDefault04" class="form-label">Comment</label>
+                                    <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
+                                  </div>
+                                <div class="col-12">
+                                  <button class="btn btn-primary" id="query_btn" type="submit">Submit form</button>
+                                </div>
+                              </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+        </p>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'hf/footer.html' %}
+ <!-- End Footer -->
+  <!-- Vendor JS Files -->
+    {% include 'hf/scripts.html' %}
+ 
+  <script>
+    $(document).on('submit','#query_form',function(e){
+      e.preventDefault()
+
+      
+      var temp = $('#file').val();
+      var data = new FormData($('#query_form')[0]);
+      data.append('file',temp);
+      data.append('csrfmiddlewaretoken',$('input[name="csrfmiddlewaretoken"]').val());
+      
+      $.ajax({
+        type:'POST',
+        url:'{% url "notes" %}',
+        processData : false,
+        contentType : false,
+        data:data,
+        success:function(){
+          $('#query_form').trigger('reset')
+          alert('save')
+        }
+      })
+    })
+  </script>
+
+</body>
+
+</html>

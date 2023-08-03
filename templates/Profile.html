@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'hf/links.html' %}
+<body class="sectionbody">
+
+  <!-- ======= Header ======= -->
+  {% include "hf/header.html" %}
+  <!-- End Header -->
+  <main id="main">
+
+    <section class="inner-page">
+      <div class="container">
+        <p>
+            <section class="vh-100">
+                <div class="container py-5 h-100">
+                  <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-3 col-lg-6 col-xl-12">
+                      <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+
+                          {% if messages %}
+                          <ul class="messages">
+                            {% for message in messages %}
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                              <strong>{{message}}</strong>
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            {% endfor %}
+                          </ul>
+                          {% endif %}
+                          
+                          <h3 class="">Profile</h3>
+                            <hr>
+                          <form class="row g-3 needs-validation" method="post" novalidate>
+                            {% csrf_token %}
+                            <div class="col-md-6">
+                              <label for="validationCustom01" class="form-label">First name</label>
+                              <input type="text" class="form-control" value="{{uid.fname}}" name="fname" id="validationCustom01" placeholder="Fist name"  required>
+                              <div class="valid-feedback">
+                                Looks good!
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <label for="validationCustom02" class="form-label">Last name</label>
+                              <input type="text" class="form-control" name="lname" value="{{uid.lname}}" id="validationCustom02" placeholder="Last name" required>
+                              <div class="valid-feedback">
+                                Looks good!
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <label for="validationCustomUsername" class="form-label">Username</label>
+                              <div class="input-group has-validation">
+                                <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                <input type="text" class="form-control" name="uname" value="{{uid.uname}}" id="validationCustomUsername" aria-describedby="inputGroupPrepend" placeholder="Username" required>
+                                <div class="invalid-feedback">
+                                  Please choose a username.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <label for="validationCustom03" class="form-label">City</label>
+                              <input type="text" class="form-control" name="city" value="{{uid.city}}" id="validationCustom03" placeholder="City" required>
+                              <div class="invalid-feedback">
+                                Please provide a valid city.
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <label for="validationCustom04" class="form-label">State</label>
+                              <select class="form-select" name="state" id="validationCustom04" required>
+                                <option selected value="{{uid.state}}">{{uid.state}}</option>
+                                <option  value="Gujarat">Gujarat</option>
+                                <option  value="Maharastra">Maharastra</option>
+                                <option  value="Madhyapradesh">Madhyapradesh</option>
+                                <option  value="Delhi">Delhi</option>
+                              </select>
+                              <div class="invalid-feedback">
+                                Please select a valid state.
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <label for="validationCustom05" class="form-label">Password</label>
+                              <input type="password" class="form-control" value="{{uid.password}}" name="password" id="validationCustom05" placeholder="Password" required>
+                              <div class="invalid-feedback">
+                                Please provide a valid zip.
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <button class="btn btn-primary" type="submit">submit</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+        </p>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+      <!-- footer start -->
+      {% include 'hf/footer.html' %}
+      <!-- footer end  -->
+      <!-- scripts start-->
+      {% include 'hf/scripts.html' %}
+      <!-- scripts end -->
+
+</body>
+
+</html>
